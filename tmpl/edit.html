@@ -1,0 +1,21 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>{{.Title}}</h1>
+        <h2>Ingredients</h2>
+        <ul>
+        {{ range $key, $value := .Ingredients }}
+            <li>{{ $value }}</li>
+        {{ end }}
+        </ul>
+        <h2>Steps</h2>
+        <ul>
+        {{ range $key, $value := .Ingredients }}
+            <li>{{ $value }}</li>
+        {{ end }}
+        </ul>
+        <p>{{ .Image }}</p>
+        <p>{{ .Image }}</p>
+    </body>
+</html>

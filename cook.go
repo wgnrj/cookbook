@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"fmt"
 	"io/ioutil"
+	//"encoding/json"
 )
 
 type Ingredient struct {
@@ -41,8 +42,15 @@ func (r *Recipe) save() error {
     return ioutil.WriteFile(filename, []byte(r.String()), 0600)
 }
 
-func loadRecipe(name string) *Recipe {
-    return &Recipe{}
+func loadRecipe(title string) (*Recipe, error) {
+    filename := "data" + title + ".txt"
+    body, err := ioutil.ReadFile(filename)
+    if err != nil {
+        return nil, err
+    }
+    var r *Recipe
+    fmt.Println(body, r)
+    return &Recipe{}, nil
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
