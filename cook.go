@@ -29,7 +29,7 @@ func (i *Ingredient) String() string {
 }
 
 // Uninterpreted/raw string literal
-var validIngredient = regexp.MustCompile(`^((\d+([,\.]\d+)?)([a-zA-Z]*))? ?([A-Za-z0-9äöüÄÖÜß\(\)\- ]+)$`)
+var validIngredient = regexp.MustCompile(`^((\d+([,\.]\d+)?)([a-zA-Z]*))? ?(.+)$`)
 
 func Ingredients(s string) ([]Ingredient, error) {
 	var ingredients []Ingredient
@@ -77,7 +77,7 @@ func (r *Recipe) String() string {
 		s += "\n\n" + v
 	}
 	for _, v := range r.Tags {
-		t += " " + v
+		t += " #" + v
 	}
 	t = strings.Trim(t, " ")
 	return fmt.Sprintf(fmt.Sprintf("%v\n%v%v\n\n%v\n%v\n%v", r.Title, i, s, t, r.Image, r.Source))
@@ -163,9 +163,7 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 	source := r.FormValue("source")
 	tags := strings.Fields(r.FormValue("tags"))
 	for i, v := range tags {
-		if !strings.HasPrefix(v, "#") {
-			tags[i] = "#" + v
-		}
+        tags[i] = strings.TrimLeft(v, "#")
 	}
 	recipe := &Recipe{
 		Title:       newTitle,
@@ -212,15 +210,16 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	for i, v := range tags {
-		if !strings.HasPrefix(v, "#") {
-			tags[i] = "#" + v
-		}
+		tags[i] = strings.TrimLeft(v, "#")
 	}
 
 	files, err := search.Search("data/", tags[0])
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound) // TODO
 	}
+    for i, v := range files {
+        files[i] = strings.TrimSuffix(v, ".txt")
+    }
 	err = templates.ExecuteTemplate(w, "results.html", files)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

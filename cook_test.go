@@ -117,7 +117,7 @@ func TestRecipeString(t *testing.T) {
 		Steps:  []string{"1. Cook chicken.", "2. Eat chicken."},
 		Image:  "chicken.jpg",
 		Source: "http://chicken.go/",
-        Tags: []string{"#Hühnchen", "#Hauptspeise"},
+        Tags: []string{"Hühnchen", "Hauptspeise"},
 	}
 
     if got := r_in.String(); got != r_want {

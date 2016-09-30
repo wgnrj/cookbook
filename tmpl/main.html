@@ -1,8 +1,9 @@
 <html>
     <head>
+        <title>Kochbuch</title>
     </head>
     <body>
-        <h1>Kochbuch</h2>
+        <h1>Kochbuch</h1>
         <p>Herzlich Willkommen bei meinem Kochbuch!</p>
 
         <h2>Suche anhand von Kategorien</h2>
@@ -11,15 +12,9 @@
         <a href="/search/Dessert">Desserts</a>
         <a href="/search/Backen">Backen</a>
         <a href="/search/Trinken">Trinken</a>
-        <form method="POST" action="/search/">
-            Kategorie:
-            <input type="text" name="tags">
-            <input type="submit" value="Suchen">
-        </form>
 
-        <h2>Suche anhand von Zutaten</h2>
+        <h2>Suche anhand von Stichworten</h2>
         <form method="POST" action="/search/">
-            Kategorie:
             <input type="text" name="tags">
             <input type="submit" value="Suchen">
         </form>

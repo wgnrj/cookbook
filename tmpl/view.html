@@ -1,10 +1,11 @@
 <html>
     <head>
+        <title>{{.Title}}</title>
     </head>
     <body>
         <a href="/">Hauptseite</a>
         <h1>{{.Title}}</h1>
-        <p>{{range $key, $value := .Tags}}{{printf "%s " $value}}{{end}}[<a href="/edit/{{.Title}}">Bearbeiten</a>] [<a href="/delete/{{.Title}}">Löschen</a>]</p>
+        <p>{{range $key, $value := .Tags}}<a href="/search/{{$value}}">{{printf "#%s" $value}}</a> {{end}}[<a href="/edit/{{.Title}}">Bearbeiten</a>] [<a href="/delete/{{.Title}}">Löschen</a>]</p>
         <h2>Zutaten</h2>
         <ul>
         {{range $key, $value := .Ingredients}}
