@@ -1,0 +1,6 @@
+<html>
+    <body>
+        <h1>Search results</h1>
+        {{range $key, $value := .}}<a href="/search/{{$value}}">{{$value}}</a><br>{{end}}
+    </body>
+</html>

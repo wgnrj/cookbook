@@ -3,19 +3,16 @@
     </head>
     <body>
         <h1>{{.Title}}</h1>
-        <h2>Ingredients</h2>
-        <ul>
-        {{ range $key, $value := .Ingredients }}
-            <li>{{ $value }}</li>
-        {{ end }}
-        </ul>
-        <h2>Steps</h2>
-        <ul>
-        {{ range $key, $value := .Ingredients }}
-            <li>{{ $value }}</li>
-        {{ end }}
-        </ul>
-        <p>{{ .Image }}</p>
-        <p>{{ .Image }}</p>
+        <form action="/save/{{.Title}}" method="POST">
+            Rezepttitel: <input type="text" name="title" value="{{.Title}}">
+            <h2>Zutaten</h2>
+            <textarea name="ingredients" rows="10" cols="40">{{range $key, $value := .Ingredients}}{{printf "%s\n" $value.String}}{{end}}</textarea>
+            <h2>Zubereitung</h2>
+            <textarea name="steps" rows="20" cols="80">{{range $key, $value := .Steps}}{{printf "%s\n" $value}}{{end}}</textarea>
+            Bild (fehlt noch): <input type="text" name="image" value="{{.Image}}">
+            Kategorie: <input type="text" name="tags" value="{{range $key, $value := .Tags}}{{printf "%s " $value}}{{end}}"><br>
+            Quelle: <input type="text" name="source" value="{{.Source}}"><br>
+            <input type="submit" value="Speichern">
+        </form>
     </body>
 </html>

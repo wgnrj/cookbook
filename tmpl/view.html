@@ -1,0 +1,21 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <a href="/">Hauptseite</a>
+        <h1>{{.Title}}</h1>
+        <p>{{range $key, $value := .Tags}}{{printf "%s " $value}}{{end}}[<a href="/edit/{{.Title}}">Bearbeiten</a>] [<a href="/delete/{{.Title}}">Löschen</a>]</p>
+        <h2>Zutaten</h2>
+        <ul>
+        {{range $key, $value := .Ingredients}}
+            <li>{{$value.String}}</li>
+        {{end}}
+        </ul>
+        <h2>Zubereitung</h2>
+        {{range $key, $value := .Steps}}
+            {{$value}}<br><br>
+        {{end}}
+        <p>{{.Image}}</p>
+        <p><a href="{{.Source}}">Quelle</a></p>
+    </body>
+</html>

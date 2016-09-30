@@ -1,0 +1,37 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>Kochbuch</h2>
+        <p>Herzlich Willkommen bei meinem Kochbuch!</p>
+
+        <h2>Suche anhand von Kategorien</h2>
+        <a href="/search/Vorspeise">Vorspeisen</a>
+        <a href="/search/Hauptspeise">Hauptspeisen</a>
+        <a href="/search/Dessert">Desserts</a>
+        <a href="/search/Backen">Backen</a>
+        <a href="/search/Trinken">Trinken</a>
+        <form method="POST" action="/search/">
+            Kategorie:
+            <input type="text" name="tags">
+            <input type="submit" value="Suchen">
+        </form>
+
+        <h2>Suche anhand von Zutaten</h2>
+        <form method="POST" action="/search/">
+            Kategorie:
+            <input type="text" name="tags">
+            <input type="submit" value="Suchen">
+        </form>
+
+        <h2>Oder gib ein neues Rezept ein</h2>
+        <form method="POST" action="/add/">
+            Titel:
+            <input type="text" name="title">
+            <input type="submit" value="Hinzufügen">
+        </form>
+
+        <h2></h2>
+        {{range $key, $value := .}}<a href="/view/{{$value}}">{{$value}}</a><br>{{end}}
+    </body>
+</html>
